@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql">
+  
+	<select id="test" resultType="Integer">
+	  	SELECT 1
+	</select>
+
+<!-- accept를 구분 하여 출력하는 쿼리 -->
+	<select id="findaccept" parameterType="com.spring.dto.TempDTO" resultType="com.spring.dto.TempDTO">
+		SELECT `no`, `title`, `content` , `accept`
+		FROM `temp1`
+		WHERE 1 = 1 
+		<if test="accept != null">
+			AND `accept` = #{accept}
+		</if> 
+		ORDER BY `regDate` desc
+	</select>
+<!-- accept 구분없이 다 출력하는 쿼리 -->	
+	<select id="findAll" parameterType="com.spring.dto.TempDTO" resultType="com.spring.dto.TempDTO">
+		SELECT `no`, `title`, `content` , `accept`
+		FROM `temp1`
+		ORDER BY `regDate` desc
+	</select>
+	
+	<select id="findOne" parameterType="com.spring.dto.TempDTO" resultType="com.spring.dto.TempDTO">
+		SELECT `no`, `title`, `content`, `accept`, DATE_FORMAT(`regDate`, '%Y-%m-%d %T' ) AS regDate
+		FROM `temp1` 
+		WHERE `no` = #{no}
+	</select>
+	
+	<insert id="save" parameterType="com.spring.dto.TempDTO">
+		INSERT INTO `temp1` 
+			(`title`, `content`) 
+		VALUE 
+			(#{title}, #{content})
+			
+		<selectKey keyProperty="no" resultType="int" order="AFTER">
+    		SELECT LAST_INSERT_ID() AS no
+		</selectKey>
+	</insert>
+  
+  	<update id="edit" parameterType="com.spring.dto.TempDTO">
+  		UPDATE `temp1` 
+  		   SET `title`   = #{title}, 
+  		       `content` = #{content} 
+  		 WHERE `no` = #{no}
+  	</update>
+  	
+  	<update id="accept" parameterType="com.spring.dto.TempDTO">
+  		UPDATE `temp1` 
+  		   SET `accept` = #{accept}
+  		 WHERE `no` = #{no}  	
+  	</update>
+  	
+  
+</mapper>
