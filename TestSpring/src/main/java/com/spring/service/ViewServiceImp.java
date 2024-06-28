@@ -19,52 +19,52 @@ public class ViewServiceImp implements ViewService {
 
 	private final ViewDao viewDao;
 
-	
-	public void list(Model model, HttpServletRequest req) { // list 페이지 화면 출력(accept 구분)
-			
-		if("true".equals(req.getParameter("accept"))){				// 승인된 데이터만 출력
-			TempDTO dto = TempDTO.builder()	
-					.accept(true)
-					.build();
-			model.addAttribute("list", viewDao.list(dto));	
-		} else if ("false".equals(req.getParameter("accept"))) {	// 미승인된 데이터만 출력
-			TempDTO dto = TempDTO.builder()	
-					.accept(false)
-					.build();
-			model.addAttribute("list", viewDao.list(dto));
-		} else {													// 전부 다 출력
-			TempDTO dto = TempDTO.builder()
-					.no(1)
-					.build();
-			model.addAttribute("list", viewDao.listall(dto));
-		}
-	}
+//////////////////// Controller 에서 바로 DAO 호출해서 처리하므로 필요 없어짐. -- 20240628 12:58
+//	public void list(Model model, HttpServletRequest req) { // list 페이지 화면 출력(accept 구분)
+//			
+//		if("true".equals(req.getParameter("accept"))){				// 승인된 데이터만 출력
+//			TempDTO dto = TempDTO.builder()	
+//					.accept(true)
+//					.build();
+//			model.addAttribute("list", viewDao.list(dto));	
+//		} else if ("false".equals(req.getParameter("accept"))) {	// 미승인된 데이터만 출력
+//			TempDTO dto = TempDTO.builder()	
+//					.accept(false)
+//					.build();
+//			model.addAttribute("list", viewDao.list(dto));
+//		} else {													// 전부 다 출력
+//			TempDTO dto = TempDTO.builder()
+//					.no(1)
+//					.build();
+//			model.addAttribute("list", viewDao.listall(dto));
+//		}
+//	}
 	
 	public TempDTO add(TempDTO dto) { // new 페이지 생성 기능
 		return viewDao.add(dto);
 	}
 	
 	public boolean findone(Model model, TempDTO dto) { // detail 페이지 출력
-		try {
+		if(dto != null) {
 			model.addAttribute("list", viewDao.findone(dto));
-		} catch (NumberFormatException e) {
+			return true;
+		} else {
 			return false;
 		}
-		return true;
 	}
 	
 	public TempDTO edit(TempDTO dto) { // 수정 기능
-		try {
+		if(dto != null) {
 			return viewDao.edit(dto);
-		} catch (NumberFormatException e) {
+		}else {
 			return null;
 		}
 	}
 	
 	public TempDTO accept(TempDTO dto) { // 승인, 미승인 기능
-		try {
+		if(dto != null) {
 			return viewDao.accept(dto);	
-		} catch (NumberFormatException e) {
+		} else {
 			return null;
 		}
 	}

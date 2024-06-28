@@ -19,14 +19,14 @@ public class ViewDaoImp implements ViewDao {
 		return session.selectOne("sql.findOne", dto);
 	}
 	
-	public List<TempDTO> list(TempDTO dto) { // list 페이지 select문 sql실행(accept 구분하여 출력)
-		List<TempDTO> list = session.selectList("sql.findaccept", dto);
+	public List<TempDTO> list(Object value) { // list 페이지 select문 sql실행(accept 구분하여 출력)
+		List<TempDTO> list = session.selectList("sql.findaccept", value);
 		return list;
 	}
-	public List<TempDTO> listall(TempDTO dto) { // list 페이지 select문 sql실행(리스트 전체 출력)
-		List<TempDTO> list = session.selectList("sql.findAll", dto);
-		return list;
-	}
+//	public List<TempDTO> listall(TempDTO dto) { // list 페이지 select문 sql실행(리스트 전체 출력)
+//		List<TempDTO> list = session.selectList("sql.findAll", dto);
+//		return list;
+//	}
 	public TempDTO add(TempDTO dto) { // new 페이지 데이터 insert문 실행
 		session.insert("sql.save",dto);
 		return dto;

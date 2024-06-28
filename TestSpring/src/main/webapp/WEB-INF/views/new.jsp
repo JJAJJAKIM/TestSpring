@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,7 @@
 <body>
     <div class="container mt-3">
         <h1 class="text-center bg-success text-dark bg-opacity-50">INPUT</h1>
-        <form action="./insert" method="post">
+        <form action="insert" method="post">
             <div class="mb-3 mt-3">
               <label for="title" class="form-label">Title:</label>
               <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" required autocomplete="off">
@@ -23,7 +24,7 @@
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-primary me-md-2" type="submit">생성</button>
-                <a class="btn btn-warning" href="./list">취소</a>
+                <a class="btn btn-warning" href="list">취소</a>
             </div>
         </form>
     </div>

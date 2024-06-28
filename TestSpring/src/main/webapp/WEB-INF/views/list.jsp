@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -15,40 +16,27 @@
     </style>
 </head>
 <body>
-<%
-	Object obj1 = request.getAttribute("list");
-	List<TempDTO> list = null;
-	if(obj1 !=null){
-		list = (List<TempDTO>)obj1;
-	}
-	
-%>
     <div class="container mt-3">
         <h1 class="text-center bg-success text-dark bg-opacity-50">LIST</h1>
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="./list" class="btn btn-secondary">전체</a>
-            <a href="./list?accept=true" class="btn btn-success">승인</a>
-            <a href="./list?accept=false" class="btn btn-warning">미승인</a>
-            <a href="./new" class="btn btn-primary">추가</a>
+            <a href="/list" class="btn btn-secondary">전체</a>
+            <a href="/list/1" class="btn btn-success">승인</a>
+            <a href="/list/0" class="btn btn-warning">미승인</a>
+            <a href="new" class="btn btn-primary">추가</a>
         </div>
         <div class="list-group mt-2 text-center">
-<% 
-	for(TempDTO dto : list) {
-		if(dto.isAccept()){
-%>        
-            <a class="list-group-item m-1 bg-success display-6" href="./detail?no=<%=dto.getNo()%>">
-                <%=dto.getTitle() %>
-            </a>        
-<%
-		} else {
-%>
-            <a class="list-group-item m-1 bg-warning display-6" href="./detail?no=<%=dto.getNo()%>">
-                <%=dto.getTitle() %>    
-            </a> 
-<%		
-		}
-	}
-%>
+        <c:forEach var="item" items="${list}" varStatus="status">
+        	<c:choose>
+        		<c:when test="${item.accept}">
+        			<a class="list-group-item m-1 bg-success display-6" href="./detail?no=${item.no}">${item.title}</a>
+        		</c:when>
+        		<c:otherwise>
+        			<a class="list-group-item m-1 bg-warning display-6" href="./detail?no=${item.no}">${item.title}</a>   
+        		</c:otherwise>
+        	</c:choose>
+        	
+        </c:forEach>
+ 
         </div>
     </div>
 </body>

@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import com.spring.dto.TempDTO;
 
 public interface ViewService {
-	
-	public void list(Model model, HttpServletRequest req); // list 페이지 화면 출력 (전체, 승인, 미승인 구분하여 출력)
+
+//////////////////Controller 에서 바로 DAO 호출해서 처리하므로 필요 없어짐. -- 20240628 12:58
+//	public void list(Model model, HttpServletRequest req); // list 페이지 화면 출력 (전체, 승인, 미승인 구분하여 출력)
+
 	public TempDTO add(TempDTO dto); // new 페이지 생성 기능
 	public boolean findone(Model model,TempDTO dto); // detail 페이지 출력
 	public TempDTO edit(TempDTO dto); // 수정 기능

@@ -9,14 +9,16 @@
 	</select>
 
 <!-- accept를 구분 하여 출력하는 쿼리 -->
-	<select id="findaccept" parameterType="com.spring.dto.TempDTO" resultType="com.spring.dto.TempDTO">
+	<select id="findaccept" parameterType="Object" resultType="com.spring.dto.TempDTO">
 		SELECT `no`, `title`, `content` , `accept`
-		FROM `temp1`
-		WHERE 1 = 1 
-		<if test="accept != null">
-			AND `accept` = #{accept}
+		FROM `temp1` 
+		<if test="accept == 1">
+			WHERE `accept` = 1
 		</if> 
-		ORDER BY `regDate` desc
+		<if test="accept == 0">
+			WHERE `accept` = 0
+		</if> 
+		ORDER BY `regDate` DESC
 	</select>
 <!-- accept 구분없이 다 출력하는 쿼리 -->	
 	<select id="findAll" parameterType="com.spring.dto.TempDTO" resultType="com.spring.dto.TempDTO">
