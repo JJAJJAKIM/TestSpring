@@ -14,9 +14,7 @@
 <body>
 <%
 	Object obj1 = request.getAttribute("list");
-	List<TempDTO> list = null;	
-	
-	 TempDTO dto = (TempDTO)obj1;
+	TempDTO dto = (TempDTO)obj1;
 		
 %>
     <div class="container mt-3">
@@ -34,7 +32,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button class="btn btn-primary me-md-2" type="submit">수정</button>
                 <a class="btn btn-success" href="./accept?no=<%=dto.getNo()%>&accept=true">승인</a>
-                <a class="btn btn-warning" href="./decline?no=<%=dto.getNo()%>&accpet=false">미승인</a>
+                <a class="btn btn-warning" href="./accept?no=<%=dto.getNo()%>&accpet=false">미승인</a>
                 <a class="btn btn-secondary" href="./list">취소</a>
   
             </div>

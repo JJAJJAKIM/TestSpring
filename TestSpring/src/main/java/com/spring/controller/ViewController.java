@@ -71,8 +71,7 @@ public class ViewController {
 	
 	/********************             detail페이지에서 승인 처리             * *******************/
 	@GetMapping("/accept")
-	public String accept(@ModelAttribute TempDTO dto) throws IOException{
-//		boolean accept = true;											
+	public String accept(@ModelAttribute TempDTO dto) throws IOException{										
 		dto = viewService.accept(dto);									
 		if(dto != null) {												
 			return "redirect:/list";
@@ -82,16 +81,4 @@ public class ViewController {
 	}
 	/**************************************************************************************/
 	
-	/*******************             detail페이지에서 미승인 처리              *******************/
-	@GetMapping("/decline")
-	public String decline(@ModelAttribute TempDTO dto) throws IOException{
-															
-		 dto = viewService.accept(dto);					
-		if(dto != null) {
-			return "redirect:/list";
-		}else {
-			return "redirect:/detail?no="+dto.getNo();
-		}
-	}
-	/**************************************************************************************/
 }

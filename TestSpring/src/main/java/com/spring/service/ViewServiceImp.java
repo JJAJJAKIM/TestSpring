@@ -60,6 +60,7 @@ public class ViewServiceImp implements ViewService {
 			return null;
 		}
 	}
+	
 	public TempDTO accept(TempDTO dto) { // 승인, 미승인 기능
 		try {
 			return viewDao.accept(dto);	
